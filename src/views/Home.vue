@@ -7,6 +7,7 @@
     <div class="mb-8">
       <AddNewCountry />
     </div>
+
     <div
       class="
         grid
@@ -19,30 +20,11 @@
       "
     >
       <div
-        class="
-          shadow-2xl
-          flex-col
-          justify-center
-          items-center
-          border-2 border-blue-200
-          rounded-xl
-          w-3/5
-          h-32
-          p-2
-        "
+        class="w-3/5 h-32 p-2"
         v-for="(currency, name, index) in newData"
         :key="index"
       >
-        <input
-          v-model="inputValue"
-          required="required"
-          class="my-2 border-2 w-40 text-center"
-          type="number"
-        />
-
-        <p class="my-2 border-2">{{ inputValue * currency }} - {{ name }}</p>
-
-        <p>1 {{ getBase }} = {{ currency }} - {{ name }}</p>
+        <Currency :currency="currency" :name="name" />
       </div>
     </div>
   </div>
@@ -51,12 +33,14 @@
 <script>
 import Currency from "./Currency.vue";
 import AddNewCountry from "../components/AddNewCountry.vue";
+import DeleteModal from "../components/DeleteModal.vue";
 
 export default {
   name: "Home",
   components: {
     Currency,
     AddNewCountry,
+    DeleteModal,
   },
   data() {
     return {
