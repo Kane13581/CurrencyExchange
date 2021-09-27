@@ -4,11 +4,9 @@ import axios from 'axios';
 export default createStore({
   state: {
     currencyExc: {},
-
     newData: {},
     setDate: {},
     setBase: {},
-    index: 0,
   },
   getters: {
     currencyExc: (state) => {

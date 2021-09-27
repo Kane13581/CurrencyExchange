@@ -43,6 +43,7 @@
 import Currency from "./Currency.vue";
 import AddNewCountry from "../components/AddNewCountry.vue";
 import DeleteModal from "../components/DeleteModal.vue";
+import axios from "axios";
 
 export default {
   name: "Home",
@@ -73,10 +74,22 @@ export default {
     },
   },
   methods: {
-    confirmDelete() {
-      this.$store.dispatch("deleteCountry", this.nameForDelete);
-      this.nameForDelete = "";
-      this.showDeleteModal = !this.showDeleteModal;
+    async confirmDelete() {
+      const headers = { "Content-Type": "application/json" };
+      await axios
+        .delete(
+          "http://api.exchangeratesapi.io/v1/latest?access_key=70f544d12fbd543b55192cad006147c9&base=EUR&" +
+            this.nameForDelete,
+          headers
+        )
+
+        .then((response) => {
+          console.log(response);
+
+          this.$store.dispatch("deleteCountry", this.nameForDelete);
+          this.nameForDelete = "";
+          this.showDeleteModal = !this.showDeleteModal;
+        });
     },
     deleteCountry(name) {
       this.showDeleteModal = !this.showDeleteModal;

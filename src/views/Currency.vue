@@ -84,16 +84,6 @@ export default {
       console.log(currency, name);
       this.$emit("delete-country", name);
     },
-
-    // getCountryIndex() {
-    //   this.indexForDelete = this.$store.getters.destinationIndexById(
-    //     this.currency
-    //   );
-    //   console.log(this.currency);
-    // },
   },
-  // created() {
-  //   this.getCountryIndex();
-  // },
 };
 </script>

@@ -18,7 +18,7 @@
           rounded
         "
       >
-        Add country
+        Add Currency
       </button>
     </div>
     <div v-else class="w-96">
@@ -91,7 +91,7 @@
                 rounded
               "
               type="text"
-              placeholder="Country Initials"
+              placeholder="Country Currency"
             />
           </div>
           <div class="flex justify-start mt-1 mr-2">
