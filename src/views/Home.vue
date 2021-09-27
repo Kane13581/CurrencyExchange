@@ -16,17 +16,26 @@
         md:grid-cols-2
         xl:grid-cols-3
         2xl:grid-cols-4
-        gap-12
+        gap-12 gap-y-24
       "
     >
       <div
-        class="w-3/5 h-32 p-2"
+        class="h-32 p-2"
         v-for="(currency, name, index) in newData"
         :key="index"
       >
-        <Currency :currency="currency" :name="name" />
+        <Currency
+          @delete-country="deleteCountry"
+          :currency="currency"
+          :name="name"
+        />
       </div>
     </div>
+    <DeleteModal
+      v-if="showDeleteModal"
+      @cancel-delete="cancelDelete"
+      @confirm-delete="confirmDelete"
+    />
   </div>
 </template>
 
@@ -45,6 +54,8 @@ export default {
   data() {
     return {
       inputValue: 0,
+      showDeleteModal: false,
+      nameForDelete: "",
     };
   },
   computed: {
@@ -61,10 +72,22 @@ export default {
       return this.$store.getters.setBase;
     },
   },
-  methods: {},
+  methods: {
+    confirmDelete() {
+      this.$store.dispatch("deleteCountry", this.nameForDelete);
+      this.nameForDelete = "";
+      this.showDeleteModal = !this.showDeleteModal;
+    },
+    deleteCountry(name) {
+      this.showDeleteModal = !this.showDeleteModal;
+      this.nameForDelete = name;
+    },
+    cancelDelete() {
+      this.showDeleteModal = !this.showDeleteModal;
+    },
+  },
   mounted: function () {
     this.$store.dispatch("getData");
-    this.$store.dispatch("getData2");
   },
 };
 </script>
